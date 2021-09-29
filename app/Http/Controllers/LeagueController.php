@@ -46,6 +46,7 @@ class LeagueController extends Controller
                 'start_date' => $request->start_date,
                 'end_date' => $request->end_date,
             ]);
+
             foreach ($request->teams as $team) {
                 $league->teams()->attach($team);
             }

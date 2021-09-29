@@ -27,8 +27,6 @@ class LeagueManagmentTest extends TestCase
 
         $response->assertOk();
 
-        $leagues = League::all();
-
         $response->assertJson([
             'data' => [
                 [
@@ -131,12 +129,15 @@ class LeagueManagmentTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
+        $teams = Team::factory(2)->create()->pluck('id')->toArray();
+
         $response = $this->post('/api/leagues', [
             'name' => 'Test League',
             'description' => 'Test League Description',
             'number_dates' => '10',
             'start_date' => '2020-01-01',
             'end_date' => '2020-12-31',
+            'teams' => $teams,
         ])->assertCreated();
 
         $this->assertCount(1, League::all());

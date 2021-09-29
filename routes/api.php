@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LeagueController;
+use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\TeamController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,3 +27,9 @@ Route::post('/teams', [TeamController::class, 'store']);
 Route::get('/team/{id}', [TeamController::class, 'show']);
 Route::put('/team/{id}', [TeamController::class, 'update']);
 Route::delete('/team/{id}', [TeamController::class, 'destroy']);
+
+Route::get('/players', [PlayerController::class, 'index']);
+Route::post('/players', [PlayerController::class, 'store']);
+Route::get('/player/{id}', [PlayerController::class, 'show']);
+Route::put('/player/{id}', [PlayerController::class, 'update']);
+Route::delete('/player/{id}', [PlayerController::class, 'destroy']);

@@ -43,7 +43,7 @@ class TeamManagmentTest extends TestCase
     }
 
     /** @test */
-    public function a_single_league_can_be_fetched_from_the_api()
+    public function a_single_team_can_be_fetched_from_the_api()
     {
         $this->withoutExceptionHandling();
 
@@ -64,7 +64,7 @@ class TeamManagmentTest extends TestCase
     }
 
     /** @test */
-    public function a_league_can_be_created()
+    public function a_team_can_be_created()
     {
         $this->withoutExceptionHandling();
 
@@ -112,7 +112,7 @@ class TeamManagmentTest extends TestCase
     }
 
     /** @test */
-    public function a_league_can_be_deleted()
+    public function a_team_can_be_deleted()
     {
         $this->withoutExceptionHandling();
 
