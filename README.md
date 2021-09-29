@@ -2,17 +2,17 @@ Utilizando Laravel deberás crear un Api Rest el cual retornará datos sobre una
 
 Endpoints
 
--   Listado de todas las ligas de fútbol nacional, considerando información como nombre, fecha de inicio, fecha de término, cantidad de fechas a jugarse.
--   Listado de equipos que participarán de una liga en particular
+-   Listado de todas las ligas de fútbol nacional, considerando información como nombre, fecha de inicio, fecha de término, cantidad de fechas a jugarse. [x]
+-   Listado de equipos que participarán de una liga en particular [x]
 -   Listado de todas las ligas en que participará un equipo en particular
 -   Listado de todos los jugadores de un equipo
 -   Carga masiva de equipos a una liga
 -   Incorporación de jugador (ya existente) a un equipo
--   Creación de un jugador
+-   Creación de un jugador [x]
 
 Pruebas
 
--   Cada endpoint debe contener pruebas unitarias las cuales deberán correr con phpunit.
+-   Cada endpoint debe contener pruebas unitarias las cuales deberán correr con phpunit. [x]
 
 Frontend
 
