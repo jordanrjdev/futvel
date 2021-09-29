@@ -29,17 +29,31 @@ class LeagueController extends Controller
 
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'required|string|max:255',
-            'number_dates' => 'required|integer',
-            'start_date' => 'required|date',
-            'end_date' => 'required|date',
-        ]);
+        try {
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'description' => 'required|string|max:255',
+                'number_dates' => 'required|integer',
+                'start_date' => 'required|date',
+                'end_date' => 'required|date',
+                'teams' => 'required|array|min:1',
+            ]);
 
-        $league = League::create($data);
+            $league = League::create([
+                'name' => $request->name,
+                'description' => $request->description,
+                'number_dates' => $request->number_dates,
+                'start_date' => $request->start_date,
+                'end_date' => $request->end_date,
+            ]);
+            foreach ($request->teams as $team) {
+                $league->teams()->attach($team);
+            }
 
-        return new ResourcesLeague($league);
+            return new ResourcesLeague($league);
+        } catch (\Exception$e) {
+            return response()->json(['Error' => $e->getMessage()], 400);
+        }
     }
 
     public function update($id)

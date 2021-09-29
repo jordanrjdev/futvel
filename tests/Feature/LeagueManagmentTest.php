@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\League;
+use App\Models\Team;
 use Faker\Factory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -16,7 +17,11 @@ class LeagueManagmentTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        League::factory(2)->create();
+        $leagues = League::factory(2)->create();
+
+        foreach ($leagues as $league) {
+            $league->teams()->attach(Team::factory(2)->create()->pluck('id')->toArray());
+        }
 
         $response = $this->get('/api/leagues');
 
@@ -34,6 +39,22 @@ class LeagueManagmentTest extends TestCase
                         'number_dates' => $leagues->first()->number_dates,
                         'start_date' => $leagues->first()->start_date,
                         'end_date' => $leagues->first()->end_date,
+                        'teams' => [
+                            'data' => [
+                                [
+
+                                    'data' => [
+                                        'id' => $leagues->first()->teams->first()->id,
+                                    ],
+                                ],
+                                [
+
+                                    'data' => [
+                                        'id' => $leagues->first()->teams->last()->id,
+                                    ],
+                                ],
+                            ],
+                        ],
                     ],
                 ],
                 [
@@ -44,6 +65,20 @@ class LeagueManagmentTest extends TestCase
                         'number_dates' => $leagues->last()->number_dates,
                         'start_date' => $leagues->last()->start_date,
                         'end_date' => $leagues->last()->end_date,
+                        'teams' => [
+                            'data' => [
+                                [
+                                    'data' => [
+                                        'id' => $leagues->last()->teams->first()->id,
+                                    ],
+                                ],
+                                [
+                                    'data' => [
+                                        'id' => $leagues->last()->teams->last()->id,
+                                    ],
+                                ],
+                            ],
+                        ],
                     ],
                 ],
             ],
@@ -58,12 +93,13 @@ class LeagueManagmentTest extends TestCase
 
         $league = League::factory()->create();
 
+        $league->teams()->attach(Team::factory(2)->create()->pluck('id')->toArray());
+
         $response = $this->get('/api/league/' . $league->id);
 
         $response->assertOk();
 
         $this->assertCount(1, League::all());
-
         $response->assertJson([
             'data' => [
                 'id' => $league->id,
@@ -72,6 +108,20 @@ class LeagueManagmentTest extends TestCase
                 'number_dates' => $league->number_dates,
                 'start_date' => $league->start_date,
                 'end_date' => $league->end_date,
+                'teams' => [
+                    'data' => [
+                        [
+                            'data' => [
+                                'id' => $league->teams->first()->id,
+                            ],
+                        ],
+                        [
+                            'data' => [
+                                'id' => $league->teams->last()->id,
+                            ],
+                        ],
+                    ],
+                ],
             ],
         ]);
     }

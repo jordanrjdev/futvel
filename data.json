@@ -1,0 +1,16 @@
+{
+    "data": {
+        "id": 1,
+        "name": "Prof. Rosario Ryan III",
+        "description": "Pariatur dolor facere consectetur sit. Consequatur non quisquam eveniet sit aut accusamus qui. Qui accusamus ea omnis rerum similique dolores quia.",
+        "number_dates": 4,
+        "start_date": "2010-06-07",
+        "end_date": "1990-06-23",
+        "teams": {
+            "data": [
+                { "data": { "id": 1, "name": "Mr. Nick Nikolaus DDS" } },
+                { "data": { "id": 2, "name": "Miss Beulah Casper" } }
+            ]
+        }
+    }
+}

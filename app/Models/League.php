@@ -11,4 +11,8 @@ class League extends Model
 
     protected $guarded = [];
 
+    public function teams()
+    {
+        return $this->belongsToMany(Team::class);
+    }
 }
