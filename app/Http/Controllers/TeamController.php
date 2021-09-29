@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\PlayerCollection;
 use App\Http\Resources\Team as ResourcesTeam;
 use App\Http\Resources\TeamCollection;
 use App\Models\Team;
@@ -58,6 +59,22 @@ class TeamController extends Controller
             $team = Team::findOrFail($id);
             $team->delete();
             return response()->json([], Response::HTTP_NO_CONTENT);
+        } catch (ModelNotFoundException $e) {
+            return response()->json(['error' => 'Team not found'], 404);
+        }
+    }
+
+    public function listPlayers($id)
+    {
+        try {
+            $team = Team::findOrFail($id);
+            return response()->json(
+                [
+                    'data' => [
+                        'name' => $team->name,
+                        'players' => new PlayerCollection($team->players),
+                    ],
+                ], Response::HTTP_OK);
         } catch (ModelNotFoundException $e) {
             return response()->json(['error' => 'Team not found'], 404);
         }

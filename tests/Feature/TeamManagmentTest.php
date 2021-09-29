@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Player;
 use App\Models\Team;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -121,5 +122,42 @@ class TeamManagmentTest extends TestCase
         $response = $this->delete('/api/team/' . $team->id)->assertNoContent();
 
         $this->assertCount(0, Team::all());
+    }
+
+    /** @test */
+    public function list_of_players_of_a_team_can_be_fetched_from_the_api()
+    {
+        $this->withoutExceptionHandling();
+
+        $team = Team::factory()->create();
+
+        $team->players()->saveMany(Player::factory(2)->create());
+
+        $response = $this->get('/api/team/' . $team->id . '/players');
+
+        $response->assertOk();
+
+        $this->assertCount(2, Player::all());
+
+        $response->assertJson([
+            'data' => [
+                'name' => $team->name,
+                'players' => [
+                    'data' => [
+                        [
+                            'data' => [
+                                'id' => $team->players->first()->id,
+                            ],
+                        ],
+                        [
+                            'data' => [
+                                'id' => $team->players->last()->id,
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ]);
+
     }
 }

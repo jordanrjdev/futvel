@@ -27,6 +27,7 @@ Route::post('/teams', [TeamController::class, 'store']);
 Route::get('/team/{id}', [TeamController::class, 'show']);
 Route::put('/team/{id}', [TeamController::class, 'update']);
 Route::delete('/team/{id}', [TeamController::class, 'destroy']);
+Route::get('team/{id}/players', [TeamController::class, 'listPlayers']);
 
 Route::get('/players', [PlayerController::class, 'index']);
 Route::post('/players', [PlayerController::class, 'store']);
