@@ -4,9 +4,9 @@ Endpoints
 
 -   Listado de todas las ligas de fútbol nacional, considerando información como nombre, fecha de inicio, fecha de término, cantidad de fechas a jugarse. [x]
 -   Listado de equipos que participarán de una liga en particular [x]
--   Listado de todas las ligas en que participará un equipo en particular
+-   Listado de todas las ligas en que participará un equipo en particular [x]
 -   Listado de todos los jugadores de un equipo [x]
--   Carga masiva de equipos a una liga
+-   Carga masiva de equipos a una liga [no entiendo el requerimento si es por api o csv]
 -   Incorporación de jugador (ya existente) a un equipo
 -   Creación de un jugador [x]
 

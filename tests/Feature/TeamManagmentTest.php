@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\League;
 use App\Models\Player;
 use App\Models\Team;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -158,6 +159,42 @@ class TeamManagmentTest extends TestCase
                 ],
             ],
         ]);
-
     }
+
+    /** @test */
+    public function list_of_leagues_of_a_team_can_be_fetched_from_the_api()
+    {
+        $this->withoutExceptionHandling();
+
+        $team = Team::factory()->create();
+
+        $team->leagues()->attach(League::factory(2)->create()->pluck('id')->toArray());
+
+        $response = $this->get('/api/team/' . $team->id . '/leagues');
+
+        $response->assertOk();
+
+        $this->assertCount(2, League::all());
+
+        $response->assertJson([
+            'data' => [
+                'name' => $team->name,
+                'leagues' => [
+                    'data' => [
+                        [
+                            'data' => [
+                                'id' => $team->leagues->first()->id,
+                            ],
+                        ],
+                        [
+                            'data' => [
+                                'id' => $team->leagues->last()->id,
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ]);
+    }
+
 }

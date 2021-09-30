@@ -23,7 +23,7 @@ class LeagueFactory extends Factory
     {
         return [
             'name' => $this->faker->name,
-            'description' => $this->faker->paragraph(),
+            'description' => $this->faker->text(),
             'number_dates' => $this->faker->numberBetween(1, 10),
             'start_date' => $this->faker->date('Y-m-d', 'now'),
             'end_date' => $this->faker->date('Y-m-d', 'now'),

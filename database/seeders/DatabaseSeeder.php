@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\League;
+use App\Models\Team;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,7 +15,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        League::factory()->create();
+        $team = Team::factory()->create();
+        $team->leagues()->attach(League::factory(10)->create()->pluck('id')->toArray());
         // \App\Models\User::factory(10)->create();
     }
 }
