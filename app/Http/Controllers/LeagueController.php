@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\League as ResourcesLeague;
 use App\Http\Resources\LeagueCollection;
+use App\Imports\TeamImport;
 use App\Models\League;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Maatwebsite\Excel\Facades\Excel;
 
 class LeagueController extends Controller
 {
@@ -86,6 +88,21 @@ class LeagueController extends Controller
             return response()->json([], Response::HTTP_NO_CONTENT);
         } catch (ModelNotFoundException $e) {
             return response()->json(['Error' => 'League not found'], 404);
+        }
+    }
+
+    public function import(Request $request)
+    {
+        try {
+            $request->validate([
+                'file' => 'required|file|mimes:xlsx,xls',
+            ]);
+
+            $file = $request->file('file');
+            Excel::import(new TeamImport, $file);
+            return response()->json(['Success' => 'Teams imported successfully'], 200);
+        } catch (\Exception$e) {
+            return response()->json(['Error' => $e->getMessage()], 400);
         }
     }
 }

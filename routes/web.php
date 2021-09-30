@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LeagueController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,5 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
  */
 Route::get('/', function () {
-    return view('welcome');
+    return view('leagues.index');
 });
+
+Route::post("/league/import/teams", [LeagueController::class, "import"]);
