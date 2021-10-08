@@ -42,3 +42,5 @@ Once you have worked on your development branch, you must upload the changes to 
 ```
 
 Once the changes are in your fork you can proceed to make your pr
+
+Maded by: @jordanrjdev
