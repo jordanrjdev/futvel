@@ -1,16 +1,44 @@
-# Futvel
+# FutVel
 
-Utilizando laravel se ha hecho los siguientes requerimientos
+FutVel is an api project which will help you improve good practices with laravel. We use unit tests and vue.js.
 
--   Listado de todas las ligas de fútbol nacional, considerando información como nombre, fecha de inicio, fecha de término, cantidad de fechas a jugarse. [x]
--   Listado de equipos que participarán de una liga en particular [x]
--   Listado de todas las ligas en que participará un equipo en particular [x]
--   Listado de todos los jugadores de un equipo [x]
--   Carga masiva de equipos a una liga [no entiendo el requerimento si es por api o csv][x]
--   Creación de un jugador [x]
--   Cada endpoint debe contener pruebas unitarias las cuales deberán correr con phpunit. [x]
+## Features
 
-Los demas puntos no se los ha hecho en la aplicacion se trabajó 3 horas el día martes y el dia jueves de 10 a 12 por motivos laborales.
-Se ha hecho la carga masiva de equipos pero no se los ha asociado a una liga.
+This api will have a "gold" version in which there will be no limits to use its resources.
 
-Se han realizado los respectivos tests y tambien los seeders para probar la api
+The normal version api will be a bit more limited to use its resources.
+
+We will use jwt to be able to authenticate the users.
+
+Each of the endpoints must have their respective tests.
+
+Data can be entered in bulk using a file with the extension .xlsx or .csv
+
+## How to contribute
+
+You must fork this project.
+
+Now you must clone the fork that you did that you can do with the command:
+
+```
+  git clone your_fork_url
+```
+
+You must choose an issue on which you will work.
+
+Now once you have your issue you must create a development branch this can be done with the command:
+
+```
+  git branch name-branch
+  git checkout name-branch
+```
+
+Once you have worked on your development branch, you must upload the changes to your fork, you can do it with the following command:
+
+```
+  git add .
+  git commit -m "message your commit"
+  git push origin name-branch
+```
+
+Once the changes are in your fork you can proceed to make your pr
