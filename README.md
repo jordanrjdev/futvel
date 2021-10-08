@@ -1,4 +1,4 @@
-# FutVel
+# Futvel
 
 FutVel is an api project which will help you improve good practices with laravel. We use unit tests and vue.js.
 
